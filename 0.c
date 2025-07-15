@@ -8,10 +8,16 @@
  *
  * Return: number of characters printed
  */
-int print(char *s)
+int print(const char *s)
 {
-	int l = _strlen(s);
+	int l;
 
+	if (!s)
+	{
+		write(STDOUT_FILENO, "(null)", 6);
+		return (6);
+	}
+	l = _strlen(s);
 	write(STDOUT_FILENO, s, l);
 	return (l);
 }
@@ -28,17 +34,13 @@ int _printf(const char *format, ...)
 	char c, *s;
 	int i = 0, count = 0;
 
+	if (format[_strlen(format) - 1] == '%')
+		return (-1);
 	va_start(list, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '\0')
-			{
-				write(STDOUT_FILENO, "%", 1);
-				count++;
-				break;
-			}
 			switch (format[i + 1])
 			{
 				case 'c':
@@ -52,13 +54,15 @@ int _printf(const char *format, ...)
 				case '%':
 					count += print("%");
 					break;
+				default:
+					count += write(STDOUT_FILENO, "%", 1);
+					count += write(STDOUT_FILENO, format + i + 1, 1);
 			}
 			i += 2;
 		}
 		else
 		{
-			write(STDOUT_FILENO, format + i, 1);
-			count++;
+			count += write(STDOUT_FILENO, format + i, 1);
 			i++;
 		}
 	}
