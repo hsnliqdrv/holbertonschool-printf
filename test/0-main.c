@@ -9,9 +9,9 @@ int main()
 {
 	int a, b;
 
-	a = _printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
+	a = _printf("Let's print a simple sentence.\n");
 	printf(" Return: %d\n", a);
-	b = printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
+	b = printf("Let's print a simple sentence.\n");
 	printf(" Return: %d\n", b);
 
 	return (0);

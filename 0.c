@@ -3,6 +3,31 @@
 #include <unistd.h>
 
 /**
+ * valid_format - checks if format is valid
+ * @format: format string
+ *
+ * Return: 1 if valid, 0 if invalid
+ */
+int valid_format(const char *format)
+{
+	int l = _strlen(format), i = 0;
+
+	while (i < l)
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == ' ' || format[i + 1] == '\0')
+			{
+				return (0);
+			}
+			i += 2;
+		}
+		else
+			i++;
+	}
+	return (1);
+}
+/**
  * print - prints characters
  * @s: string
  *
@@ -34,7 +59,7 @@ int _printf(const char *format, ...)
 	char c, *s;
 	int i = 0, count = 0;
 
-	if (format[_strlen(format) - 1] == '%')
+	if (!valid_format(format))
 		return (-1);
 	va_start(list, format);
 	while (format[i])
