@@ -1,0 +1,38 @@
+.TH _PRINTF 3 "July 2025" "1.0" "holbertonschool-printf manual"
+.SH NAME
+_printf \- produce output according to a format
+.SH SYNOPSIS
+#include "main.h"
+
+int _printf(const char *format, ...);
+.SH DESCRIPTION
+_printf produces output according to a format string, which can contain ordinary characters and format specifiers.
+
+It supports the following conversion specifiers:
+.TP
+.c
+Prints a single character.
+.TP
+.s
+Prints a string.
+.TP
+.%
+Prints a percent sign.
+.TP
+.d, .i
+Prints a decimal (base 10) integer.
+
+Note: This implementation does not handle flags, width, precision, or length modifiers.
+.SH RETURN VALUE
+The function returns the number of characters printed (excluding the null byte used to end output to strings).
+.SH ERRORS
+If the format string is NULL or invalid, the function returns -1.
+.SH EXAMPLES
+To print a string:
+.RS
+_printf("Hello, %s!\n", "world");
+.RE
+.SH SEE ALSO
+printf(3), write(2)
+.SH AUTHOR
+Evez Memmedov <evezm254@gmail.com>
