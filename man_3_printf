@@ -36,3 +36,4 @@ _printf("Hello, %s!\n", "world");
 printf(3), write(2)
 .SH AUTHOR
 Evez Memmedov <evezm254@gmail.com>
+Hasanali Qadirov <heseneli536@gmail.com>
