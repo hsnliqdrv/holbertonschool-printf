@@ -79,6 +79,10 @@ int _printf(const char *format, ...)
 				case '%':
 					count += print("%");
 					break;
+				case 'd':
+				case 'i':
+					count += print_int(va_arg(list, int));
+					break;
 				default:
 					count += write(STDOUT_FILENO, "%", 1);
 					count += write(STDOUT_FILENO, format + i + 1, 1);
