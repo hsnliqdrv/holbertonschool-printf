@@ -4,5 +4,5 @@
 int _printf(const char *format, ...);
 int _strlen(const char *s);
 int print_int(int n);
-int print_binary(unsigned int n);
+int print_base(unsigned int n, unsigned int base, int upper);
 #endif

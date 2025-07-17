@@ -77,7 +77,19 @@ int handle_specifier(const char *format, int *i, va_list list)
 			count += print_int(va_arg(list, int));
 			break;
 		case 'b':
-			count += print_binary(va_arg(list, unsigned int));
+			count += print_base(va_arg(list, unsigned int), 2, 0);
+			break;
+		case 'u':
+			count += print_base(va_arg(list, unsigned int), 10, 0);
+			break;
+		case 'o':
+			count += print_base(va_arg(list, unsigned int), 8, 0);
+			break;
+		case 'x':
+			count += print_base(va_arg(list, unsigned int), 16, 0);
+			break;
+		case 'X':
+			count += print_base(va_arg(list, unsigned int), 16, 1);
 			break;
 		default:
 			count += write(STDOUT_FILENO, "%", 1);
