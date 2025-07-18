@@ -24,7 +24,7 @@ char *base_tostring(unsigned int n, unsigned int base, int upper)
 {
 	char *digits, c, *s;
 	unsigned int l = 1, num = n, m = 1, i = 0;
-	
+
 	while (num > 0)
 	{
 		l++;
@@ -63,34 +63,34 @@ char *base_tostring(unsigned int n, unsigned int base, int upper)
 /**
  * int_tostring - integer as string
  * @n: integer to be converted
- * 
+ *
  * Return: string representation
  */
 char *int_tostring(int n)
 {
-        char *s = malloc(12);
-        unsigned int num = n >= 0 ? n : -n;
-        unsigned int m = 1000000000, i = 0, k;
+	char *s = malloc(12);
+	unsigned int num = n >= 0 ? n : -n;
+	unsigned int m = 1000000000, i = 0, k;
 
-        while (m > num)
-                m /= 10;
-        if (n < 0)
-        {
-                s[0] = '-';
-                i++;
-        }
-        while (m > 0)
-        {
-                k = num / m % 10;
-                if (k == 0 && i == (n < 0))
-                {
-                        m /= 10;
-                        continue;
-                }
-                s[i] = '0' + k;
-                i++;
-                m /= 10;
-        }
-        s[i] = '\0';
-        return (s);
+	while (m > num)
+		m /= 10;
+	if (n < 0)
+	{
+		s[0] = '-';
+		i++;
+	}
+	while (m > 0)
+	{
+		k = num / m % 10;
+		if (k == 0 && i == (n < 0))
+		{
+			m /= 10;
+			continue;
+		}
+		s[i] = '0' + k;
+		i++;
+		m /= 10;
+	}
+	s[i] = '\0';
+	return (s);
 }
