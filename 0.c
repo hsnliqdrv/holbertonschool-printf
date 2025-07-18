@@ -100,7 +100,7 @@ int _printf(const char *format, ...)
 		{
 			char *s = handle_specifier(format, &i, list);
 
-			count += _strncpy(buffer, s, buffer_size - count);
+			count += _strncpy(buffer + count, s, buffer_size - count);
 			free(s);
 		}
 		else
