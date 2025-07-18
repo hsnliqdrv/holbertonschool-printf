@@ -1,1 +1,1 @@
--Wall -Werror -Wextra -pedantic -Wno-format -I..
+-Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format -I..

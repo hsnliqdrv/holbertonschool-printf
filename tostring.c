@@ -46,11 +46,11 @@ char *get_digits(unsigned int base)
  *
  * Return: string
  */
-char *base_tostring(unsigned long long n, unsigned int base, int upper)
+char *base_tostring(unsigned int n, unsigned int base, int upper)
 {
 	char *digits = get_digits(base), c, *s;
 	unsigned int l = 1, i = 0;
-	unsigned long long m = 1, num = n;
+	unsigned int m = 1, num = n;
 
 	while (num > 0)
 	{
