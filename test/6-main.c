@@ -8,9 +8,9 @@
 int main()
 {
 	int a, b;
-	a = _printf("%p\n", &a);
+	a = _printf("%p\n", (void *)0x7fff5100b608);
 	printf("\nReturn: %d\n", a);
-	b = printf("%p\n", &a);
+	b = printf("%p\n", (void *)0x7fff5100b608);
 	printf("\nReturn: %d\n", b);
 	return (0);
 }

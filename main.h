@@ -22,7 +22,7 @@ int print(const char *s);
 int _printf(const char *format, ...);
 int _strlen(const char *s);
 char *int_tostring(int n);
-char *base_tostring(unsigned long n, unsigned int base, int upper);
+char *base_tostring(unsigned long long n, unsigned int base, int upper);
 
 char *spec_p(va_list list);
 char *spec_S(va_list);
