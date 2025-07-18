@@ -22,10 +22,10 @@ char to_upper(char c)
  */
 int print_base(unsigned int n, unsigned int base, int upper)
 {
-        int count = 0;
+	int count = 0;
 	char *digits, c;
 
-	switch(base)
+	switch (base)
 	{
 		case 2:
 			digits = "01";
@@ -39,10 +39,10 @@ int print_base(unsigned int n, unsigned int base, int upper)
 		case 16:
 			digits = "0123456789abcdef";
 	}
-        if (n / base)
-                count += print_base(n / base, base, upper);
+	if (n / base)
+		count += print_base(n / base, base, upper);
 	c = digits[n % base];
 	c = upper ? to_upper(c) : c;
-        count += write(1, &c, 1);
-        return (count);
+	count += write(1, &c, 1);
+	return (count);
 }

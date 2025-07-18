@@ -56,44 +56,20 @@ int print(const char *s)
  */
 int handle_specifier(const char *format, int *i, va_list list)
 {
-	char c, *s;
-	int count = 0;
+	int count = 0, j = 0;
+	pair_t array[] = {{'c', spec_c}, {'s', spec_s}, {'%', spec_per},
+		{'d', spec_int}, {'i', spec_int}, {'b', spec_b},
+		{'u', spec_u}, {'o', spec_o}, {'x', spec_x}, {'X', spec_X},
+		{0, NULL}};
 
-	switch (format[*i + 1])
+	while ((array[j].c != 0) && (format[*i + 1] != array[j].c))
+		j++;
+	if (array[j].f)
+		count = array[j].f(list);
+	else
 	{
-		case 'c':
-			c = va_arg(list, int);
-			count += write(STDOUT_FILENO, &c, 1);
-			break;
-		case 's':
-			s = va_arg(list, char *);
-			count += print(s);
-			break;
-		case '%':
-			count += print("%");
-			break;
-		case 'd':
-		case 'i':
-			count += print_int(va_arg(list, int));
-			break;
-		case 'b':
-			count += print_base(va_arg(list, unsigned int), 2, 0);
-			break;
-		case 'u':
-			count += print_base(va_arg(list, unsigned int), 10, 0);
-			break;
-		case 'o':
-			count += print_base(va_arg(list, unsigned int), 8, 0);
-			break;
-		case 'x':
-			count += print_base(va_arg(list, unsigned int), 16, 0);
-			break;
-		case 'X':
-			count += print_base(va_arg(list, unsigned int), 16, 1);
-			break;
-		default:
-			count += write(STDOUT_FILENO, "%", 1);
-			count += write(STDOUT_FILENO, format + *i + 1, 1);
+		count = write(STDOUT_FILENO, "%", 1) +
+			write(STDOUT_FILENO, format + *i + 1, 1);
 	}
 	*i += 2;
 	return (count);

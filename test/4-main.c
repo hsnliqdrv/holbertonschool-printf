@@ -9,9 +9,9 @@ int main()
 {
 	int a, b;
 
-	a = _printf("%x\n", 15);
+	a = _printf("%b\n", 15);
 	printf(" Return: %d\n", a);
-	b = printf("%x\n", 15);
+	b = printf("%b\n", 15);
 	printf(" Return: %d\n", b);
 
 	return (0);
