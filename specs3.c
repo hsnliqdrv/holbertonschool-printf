@@ -9,7 +9,7 @@
 char *spec_p(va_list list)
 {
 	void *ptr = va_arg(list, void *);
-	unsigned long int n = (unsigned long int) ptr;
+	unsigned long long n = (unsigned long long) ptr;
 	char *s = malloc(15), *s2;
 	int i;
 

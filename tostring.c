@@ -49,8 +49,8 @@ char *get_digits(unsigned int base)
 char *base_tostring(unsigned long long n, unsigned int base, int upper)
 {
 	char *digits = get_digits(base), c, *s;
-	unsigned int l = 1, num = n, i = 0;
-	unsigned long long m = 1;
+	unsigned int l = 1, i = 0;
+	unsigned long long m = 1, num = n;
 
 	while (num > 0)
 	{
