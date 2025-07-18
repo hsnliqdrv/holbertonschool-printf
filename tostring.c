@@ -13,27 +13,15 @@ char to_upper(char c)
 	return (c);
 }
 /**
- * base_tostring - convert unsigned to different bases
- * @n: unsigned int
- * @base: base
- * @upper: if convert in upper case
+ * get_digits - gets digits from base
+ * @base: base number
  *
- * Return: string
+ * Return: string containing digits
  */
-char *base_tostring(unsigned int n, unsigned int base, int upper)
+char *get_digits(unsigned int base)
 {
-	char *digits, c, *s;
-	unsigned int l = 1, num = n, m = 1, i = 0;
+	char *digits = "";
 
-	while (num > 0)
-	{
-		l++;
-		num /= base;
-		m *= base;
-	}
-	m /= base;
-	s = malloc(l + 1);
-	assert(s != NULL);
 	switch (base)
 	{
 		case 2:
@@ -48,6 +36,31 @@ char *base_tostring(unsigned int n, unsigned int base, int upper)
 		case 16:
 			digits = "0123456789abcdef";
 	}
+	return (digits);
+}
+/**
+ * base_tostring - convert unsigned to different bases
+ * @n: unsigned int
+ * @base: base
+ * @upper: if convert in upper case
+ *
+ * Return: string
+ */
+char *base_tostring(unsigned long n, unsigned int base, int upper)
+{
+	char *digits = get_digits(base), c, *s;
+	unsigned int l = 1, num = n, i = 0;
+	unsigned long m = 1;
+
+	while (num > 0)
+	{
+		l++;
+		num /= base;
+		m *= base;
+	}
+	m /= base;
+	s = malloc(l + 1);
+	assert(s != NULL);
 	while (m > 0)
 	{
 		c = digits[n / m % base];
