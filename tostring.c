@@ -33,6 +33,7 @@ char *base_tostring(unsigned int n, unsigned int base, int upper)
 	}
 	m /= base;
 	s = malloc(l + 1);
+	assert(s != NULL);
 	switch (base)
 	{
 		case 2:
@@ -72,6 +73,7 @@ char *int_tostring(int n)
 	unsigned int num = n >= 0 ? n : -n;
 	unsigned int m = 1000000000, i = 0, k;
 
+	assert(s != NULL);
 	while (m > num)
 		m /= 10;
 	if (n < 0)

@@ -10,6 +10,7 @@ char *spec_c(va_list list)
 {
 	char *s = malloc(2);
 
+	assert(s != NULL);
 	s[0] = va_arg(list, int);
 	s[1] = '\0';
 	return (s);
@@ -26,6 +27,7 @@ char *spec_s(va_list list)
 	int l = _strlen(str);
 	char *s = malloc(l + 1);
 
+	assert(s != NULL);
 	_strncpy(s, str, l);
 	s[l] = '\0';
 	return (s);
@@ -40,6 +42,7 @@ char *spec_per(va_list list)
 {
 	char *s = malloc(2);
 
+	assert(s != NULL);
 	(void) list;
 	s[0] = '%';
 	s[1] = '\0';

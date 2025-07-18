@@ -49,12 +49,12 @@ char *spec_X(va_list list)
 char *spec_S(va_list list)
 {
 	int l = 0, i = 0, d = 0;
+	unsigned char c;
 	char *str = va_arg(list, char *), *s, *s2;
 
 	while (str[i])
 	{
-		unsigned char c = str[i];
-
+		c = str[i];
 		if (!(c >= 32 && c <= 126))
 			l += 4;
 		else
@@ -62,11 +62,11 @@ char *spec_S(va_list list)
 		i++;
 	}
 	s = malloc(l + 1);
+	assert(s != NULL);
 	i = 0;
 	while (str[i])
 	{
-		unsigned char c = str[i];
-
+		c = str[i];
 		if (!(c >= 32 && c <= 126))
 		{
 			s[d] = '\\';

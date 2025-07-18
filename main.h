@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
-
+#include <assert.h>
 /**
  * struct pair_s - pair structure
  * @c: character
