@@ -62,14 +62,12 @@ char *handle_specifier(const char *format, int *i, va_list list)
 	pair_t array[] = {{'c', spec_c}, {'s', spec_s}, {'%', spec_per},
 		{'d', spec_int}, {'i', spec_int}, {'b', spec_b},
 		{'u', spec_u}, {'o', spec_o}, {'x', spec_x}, {'X', spec_X},
-		{0, NULL}};
+		{'S', spec_S}, {0, NULL}};
 
 	while ((array[j].c != 0) && (format[*i + 1] != array[j].c))
 		j++;
 	if (array[j].f)
-	{
 		s = array[j].f(list);
-	}
 	else
 	{
 		s = malloc(3);
