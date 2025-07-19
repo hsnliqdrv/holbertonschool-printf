@@ -3,55 +3,83 @@
 /**
  * spec_u - specifier printer
  * @list: argument list
+ * @flags: flag string
  *
  * Return: string representation
  */
-char *spec_u(va_list list)
+char *spec_u(va_list list, char *flags)
 {
+	(void) flags;
 	return (base_tostring(va_arg(list, unsigned int), 10, 0));
 }
 /**
  * spec_o - specifier printer
  * @list: argument list
+ * @flags: flag string
  *
  * Return: string representation
  */
-char *spec_o(va_list list)
+char *spec_o(va_list list, char *flags)
 {
-	return (base_tostring(va_arg(list, unsigned int), 8, 0));
+	char *ss = base_tostring(va_arg(list, unsigned int), 16, 0), *s;
+
+	if (included(flags, '#'))
+		s = concat("0", ss);
+	else
+		return (ss);
+	free(ss);
+	return (s);
 }
 /**
  * spec_x - specifier printer
  * @list: argument list
+ * @flags: flag string
  *
  * Return: string representation
  */
-char *spec_x(va_list list)
+char *spec_x(va_list list, char *flags)
 {
-	return (base_tostring(va_arg(list, unsigned int), 16, 0));
+	char *ss = base_tostring(va_arg(list, unsigned int), 16, 0), *s;
+
+	if (included(flags, '#'))
+		s = concat("0x", ss);
+	else
+		return (ss);
+	free(ss);
+	return (s);
 }
 /**
  * spec_X - specifier printer
  * @list: argument list
+ * @flags: flag string
  *
  * Return: string representation
  */
-char *spec_X(va_list list)
+char *spec_X(va_list list, char *flags)
 {
-	return (base_tostring(va_arg(list, unsigned int), 16, 1));
+	char *ss = base_tostring(va_arg(list, unsigned int), 16, 1), *s;
+
+	if (included(flags, '#'))
+		s = concat("0X", ss);
+	else
+		return (ss);
+	free(ss);
+	return (s);
 }
 /**
  * spec_S - specifier printer
  * @list: argument list
+ * @flags: flag string
  *
  * Return: string representation
  */
-char *spec_S(va_list list)
+char *spec_S(va_list list, char *flags)
 {
 	int l = 0, i = 0, d = 0;
 	unsigned char c;
 	char *str = va_arg(list, char *), *s, *s2;
 
+	(void) flags;
 	while (str[i])
 	{
 		c = str[i];

@@ -8,7 +8,7 @@
  */
 unsigned int _strncpy(char *dest, const char *src, unsigned int n)
 {
-	unsigned int i;
+	unsigned int i = 0;
 
 	if (!dest || !src)
 		return (0);

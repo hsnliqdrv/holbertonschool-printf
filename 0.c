@@ -17,7 +17,7 @@ int valid_format(const char *format)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == ' ' || format[i + 1] == '\0')
+			if (format[i + 1] == '\0')
 				return (0);
 			i += 2;
 		}
@@ -46,7 +46,6 @@ int print(const char *s)
 	write(STDOUT_FILENO, s, l);
 	return (l);
 }
-
 /**
  * handle_specifier - handles format specifiers
  * @format: format string
@@ -57,24 +56,47 @@ int print(const char *s)
  */
 char *handle_specifier(const char *format, int *i, va_list list)
 {
-	char *s;
-	int j = 0;
+	char *s, *flags;
+	int j = 0, sp = 1;
 	pair_t array[] = {{'c', spec_c}, {'s', spec_s}, {'%', spec_per},
 		{'d', spec_int}, {'i', spec_int}, {'b', spec_b},
 		{'u', spec_u}, {'o', spec_o}, {'x', spec_x}, {'X', spec_X},
 		{'S', spec_S}, {'p', spec_p}, {0, NULL}};
 
-	while ((array[j].c != 0) && (format[*i + 1] != array[j].c))
-		j++;
-	if (array[j].f)
-		s = array[j].f(list);
+	while (format[*i + sp])
+	{
+		if (!included("+ #", format[*i + sp]))
+		{
+			while ((array[j].c != 0) &&
+				(format[*i + sp] != array[j].c))
+			{
+				j++;
+			}
+			break;
+		}
+		sp++;
+	}
+	if (!(array[j].c))
+	{
+		if (sp == 1)
+		{
+			s = malloc(sp + 2);
+			_strncpy(s, format + *i, sp + 1);
+			s[sp + 1] = '\0';
+		}
+		else
+			return (NULL);
+	}
 	else
 	{
-		s = malloc(3);
-		_strncpy(s, format + *i, 2);
-		s[2] = '\0';
+		flags = malloc(sp);
+		assert(flags != NULL);
+		_strncpy(flags, format + *i + 1, sp - 1);
+		flags[sp - 1] = '\0';
+		s = array[j].f(list, flags);
+		free(flags);
 	}
-	*i += 2;
+	*i += sp + 1;
 	return (s);
 }
 
@@ -100,6 +122,12 @@ int _printf(const char *format, ...)
 		{
 			char *s = handle_specifier(format, &i, list);
 
+			if (!s)
+			{
+				free(buffer);
+				va_end(list);
+				return (-1);
+			}
 			count += _strncpy(buffer + count, s, buffer_size - count);
 			free(s);
 		}

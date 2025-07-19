@@ -3,30 +3,37 @@
 /**
  * spec_p - specifier printer
  * @list: argument list
+ * @flags: flag string
  *
  * Return: string representation
  */
-char *spec_p(va_list list)
+char *spec_p(va_list list, char *flags)
 {
 	void *ptr = va_arg(list, void *);
-	unsigned char *cp = (unsigned char *) &ptr;
-	char *s;
-	int i;
+	char *ss = ptr_tostring(ptr), *s = NULL;
+	int i = 0;
 
-	if (ptr == NULL)
-		return (_strdup("(nil)"));
-	s = malloc(15);
-	assert(s != NULL);
-	s[0] = '0';
-	s[1] = 'x';
-	for (i = 0; i < 6; i++)
+	while (flags[i])
 	{
-		char *s2 = base_tostring(cp[i], 16, 0);
-
-		s[14 - 2 * (i + 1)] = s2[1] ? s2[0] : '0';
-		s[14 - 2 * (i + 1) + 1] = s2[1] ? s2[1] : s2[0];
-		free(s2);
+		switch(flags[i])
+		{
+			case '+':
+				if (ss[0] != '0')
+					return (ss);
+				s = concat("+", ss);
+				break;
+			case ' ':
+				if (ss[0] != '0')
+					return (ss);
+				s = concat(" ", ss);
+				break;
+		}
+		i++;
 	}
-	s[14] = '\0';
-	return (s);
+	if (s)
+	{
+		free(ss);
+		return (s);
+	}
+	return (ss);
 }

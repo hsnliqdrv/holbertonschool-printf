@@ -109,3 +109,39 @@ char *int_tostring(int n)
 	s[i] = '\0';
 	return (s);
 }
+/**
+ * ptr_tostring - pointer to string
+ * @ptr: pointer
+ *
+ * Return: pointer as hex
+ */
+char *ptr_tostring(void *ptr)
+{
+	int i, p = 0, f = 0;
+	unsigned char *cp = (unsigned char *) &ptr, c;
+	char *s, *ss;
+
+	if (!ptr)
+		return (_strdup("(nil)"));
+	s = malloc(19);
+	assert(s != NULL);
+	s[0] = '0';
+	s[1] = 'x';
+	for (i = 0; i < 8; i++)
+	{
+		c = cp[7 - i];
+		if (!f && i < 2)
+		{
+			if (!c)
+				continue;
+			else
+				f = 1;
+		}
+		ss = base_tostring(c, 16, 0);
+		s[2 * (p + 1)] = ss[1] ? ss[0] : '0';
+		s[2 * (p + 1) + 1] = ss[1] ? ss[1] : ss[0];
+		p++;
+		free(ss);
+	}
+	return (s);
+}
